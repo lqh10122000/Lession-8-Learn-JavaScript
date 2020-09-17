@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+
+
+
+
+        const second = () =>
+        {
+            setTimeout(() =>
+            {
+                console.log('second');
+
+            }, 1000);
+
+        }
+        const first = () =>
+        {
+            console.log('hi there!');
+            second();
+            console.log('the end');
+        }
+        first();
+
+        function getRecipe()
+        {
+            setTimeout(() => {
+                const RecipeID = [100, 200, 300, 400];
+                console.log(RecipeID);
+                setTimeout(id => {
+                    const recipe = {title: 'javaScript is the best', publicSher: 'Quang Huy'};
+                    console.log(`${id}% ${recipe.title} name this guy is ${recipe.publicSher}`);
+                    setTimeout(publicSher => {
+                        const recipe2 = {title: 'im testing this function ', publicSher: 'Quang Huy'};
+                        console.log(`${id}% ${recipe2.title} name this guy is ${recipe2.publicSher} and ${recipe.publicSher}`);
+                        console.log(recipe);
+                    }, 5000, recipe.publicSher);
+                }, 5000, RecipeID[3]);
+            }, 5000);
+        }
+
+        getRecipe();
+
+
+        const getID = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve([100, 200, 300, 400]);
+            }, 1000);
+        });
+
+        const getRecipe = recID => {
+            return new Promise((resolve, reject) => {
+                setTimeout(ID => {
+
+                    resolve(`test ID : ${ID}`);
+                    
+
+                }, 1000, recID);
+            });
+        };
+
+
+
+        const getRelates = publicSher => {
+            return new Promise((resolve, reject) => {
+                setTimeout(publicSher => {
+                    resolve(publicSher);
+                }, 1000, publicSher);
+            });
+        };
+
+
+        //ES5
+
+        getID
+            .then(IDs => {
+                console.log(IDs);
+                return getRecipe(IDs[0]);
+            })
+            .then(recipe => {
+                console.log(recipe);
+            });
+
+
+        //ES6
+
+        async function getRecipeID()
+        {
+            const IDs = await getID;
+            console.log(IDs);
+            const recipe = await getRecipe(IDs[2]);
+
+            console.log(recipe);
+            return recipe;
+        }
+
+        // we can use like this 
+        // const rec = getRecipeID();
+        // console.log(rec);
+
+        // and another way use with return function()
+
+        getRecipeID().then(result => console.log(`${result} is the best`)); 
+        
+        fetch('https://crossorigin.me/https://www.metaweather.com/api/location/44418/')
+        .then(result =>
+        {
+            console.log(result);
+        })
+        .catch(error =>
+        {
+            console.log(error);
+        });
+
+
+
+    </script>
+</body>
+
+</html>
